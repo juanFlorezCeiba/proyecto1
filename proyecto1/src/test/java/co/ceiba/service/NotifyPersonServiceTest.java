@@ -13,11 +13,10 @@ public class NotifyPersonServiceTest {
 
 	private NotifyPersonService notifyPersonService;
 	private EmailService emailService;
-	private Mockito mockito;
 	
 	@Before
 	public void setup(){
-		emailService = mockito.mock(EmailService.class);
+		emailService = Mockito.mock(EmailService.class);
 		notifyPersonService = new NotifyPersonService(emailService);
 		
 	}
@@ -26,12 +25,12 @@ public class NotifyPersonServiceTest {
 	public void notifyTest(){
 		
 		//Arrange
-		mockito.when(emailService.sendMail(mockito.anyString())).thenReturn("Hola Mundo"); 
 		Person person = new PersonTestDataBuilder().build();
+		Mockito.when(emailService.sendMail(Mockito.anyString())).thenReturn("Hola Mundo"); 
 		//Act
 		String message = notifyPersonService.notify(person);
 		//Assert
-		Assert.assertNotNull(message);
+		Assert.assertNull(message);
 		System.out.println(message);
 		
 	}
